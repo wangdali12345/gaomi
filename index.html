@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>精品出版</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -24,7 +21,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
             background: #ffffff;
             color: var(--apple-black);
             line-height: 1.47059;
@@ -38,7 +35,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -77,7 +74,7 @@
         }
 
         .hero-title {
-            font-size: clamp(56px, 8vw, 96px);
+            font-size: clamp(40px, 8vw, 80px);
             line-height: 1.05;
             font-weight: 700;
             letter-spacing: -.003em;
@@ -88,26 +85,23 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease-out;
         }
 
         .hero-subtitle {
-            font-size: clamp(28px, 3.5vw, 42px);
+            font-size: clamp(24px, 3.5vw, 36px);
             line-height: 1.2;
             font-weight: 400;
             color: var(--apple-gray);
             margin-bottom: calc(var(--spacing-unit) * 8);
             max-width: 800px;
-            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .hero-description {
-            font-size: clamp(19px, 2vw, 24px);
+            font-size: clamp(18px, 2vw, 22px);
             line-height: 1.4;
             color: var(--apple-navy);
             max-width: 680px;
             margin-bottom: calc(var(--spacing-unit) * 10);
-            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         /* 按钮样式 */
@@ -116,7 +110,6 @@
             gap: calc(var(--spacing-unit) * 3);
             flex-wrap: wrap;
             justify-content: center;
-            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .btn {
@@ -130,10 +123,11 @@
             letter-spacing: -.022em;
             border-radius: 980px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.2s ease;
             text-decoration: none;
             min-width: 28px;
             border: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-primary {
@@ -166,10 +160,15 @@
 
         .section {
             padding: calc(var(--spacing-unit) * 20) 0;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
         }
 
         .section-title {
-            font-size: clamp(32px, 4vw, 48px);
+            font-size: clamp(28px, 4vw, 40px);
             line-height: 1.1;
             font-weight: 600;
             text-align: center;
@@ -178,22 +177,13 @@
         }
 
         /* 开始界面 */
-        .start-screen, .test-screen, .result-screen {
-            display: none;
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        .start-screen.active, .test-screen.active, .result-screen.active {
-            display: block;
-        }
-
         .start-content {
             text-align: center;
             padding: calc(var(--spacing-unit) * 10) 0;
         }
 
         .start-description {
-            font-size: 19px;
+            font-size: 17px;
             line-height: 1.6;
             color: var(--apple-navy);
             max-width: 680px;
@@ -216,7 +206,7 @@
         .progress-fill {
             background: var(--apple-blue);
             height: 100%;
-            transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: width 0.3s ease;
         }
 
         .progress-text {
@@ -249,7 +239,7 @@
         }
 
         .question-title {
-            font-size: 28px;
+            font-size: 24px;
             line-height: 1.3;
             font-weight: 600;
             margin-bottom: calc(var(--spacing-unit) * 6);
@@ -257,7 +247,7 @@
         }
 
         .dialect-text {
-            font-size: 32px;
+            font-size: 28px;
             line-height: 1.2;
             font-weight: 700;
             color: var(--apple-black);
@@ -281,10 +271,11 @@
             border-radius: 12px;
             padding: calc(var(--spacing-unit) * 5);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.2s ease;
             text-align: left;
-            font-size: 17px;
+            font-size: 16px;
             line-height: 1.4;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .option:hover {
@@ -322,7 +313,6 @@
             border-radius: 8px;
             margin: calc(var(--spacing-unit) * 8) 0;
             display: none;
-            animation: slideDown 0.3s ease-out;
         }
 
         .explanation.show {
@@ -349,7 +339,7 @@
         }
 
         .result-title {
-            font-size: 48px;
+            font-size: 40px;
             line-height: 1.1;
             font-weight: 700;
             margin-bottom: calc(var(--spacing-unit) * 4);
@@ -361,7 +351,7 @@
             padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 6);
             border-radius: 50px;
             font-weight: 600;
-            font-size: 19px;
+            font-size: 18px;
             margin: calc(var(--spacing-unit) * 4) 0;
         }
 
@@ -400,7 +390,7 @@
         }
 
         .stat-value {
-            font-size: 48px;
+            font-size: 40px;
             line-height: 1;
             font-weight: 700;
             color: var(--apple-blue);
@@ -408,7 +398,7 @@
         }
 
         .stat-label {
-            font-size: 17px;
+            font-size: 16px;
             color: var(--apple-gray);
             font-weight: 400;
         }
@@ -421,48 +411,16 @@
         }
 
         .knowledge-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
             margin-bottom: calc(var(--spacing-unit) * 4);
             color: var(--apple-black);
         }
 
         .knowledge-content {
-            font-size: 17px;
+            font-size: 16px;
             line-height: 1.6;
             color: var(--apple-navy);
-        }
-
-        /* 动画 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                max-height: 0;
-            }
-            to {
-                opacity: 1;
-                max-height: 300px;
-            }
         }
 
         /* 响应式设计 */
@@ -492,13 +450,23 @@
             }
 
             .dialect-text {
-                font-size: 24px;
+                font-size: 22px;
                 padding: calc(var(--spacing-unit) * 4);
             }
 
             .question-title {
-                font-size: 24px;
+                font-size: 20px;
             }
+        }
+
+        /* 加载优化 */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -531,7 +499,7 @@
                 <p class="start-description">
                     高密市位于山东省东部，隶属于潍坊市，历史悠久，文化底蕴深厚。<br>
                     高密方言属于山东方言的胶辽官话，有着独特的语音和词汇特色。<br>
-                    本测试将通过20道精选词汇题目，深度考察您对高密方言的了解程度。
+                    本测试将通过精选词汇题目，深度考察您对高密方言的了解程度。
                 </p>
                 <button class="btn btn-primary" onclick="startTest()">开始测试</button>
             </div>
@@ -543,7 +511,7 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill" style="width: 0%"></div>
                 </div>
-                <div class="progress-text" id="progressText">题目 1 / 20</div>
+                <div class="progress-text" id="progressText">题目 1 / 24</div>
             </div>
 
             <div class="question-card">
@@ -577,7 +545,7 @@
                     <div class="stat-label">答对题数</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" id="totalQuestions">20</div>
+                    <div class="stat-value" id="totalQuestions">24</div>
                     <div class="stat-label">总题数</div>
                 </div>
                 <div class="stat-item">
@@ -590,8 +558,8 @@
                 <h3 class="knowledge-title">高密方言文化知识</h3>
                 <div class="knowledge-content">
                     高密方言保留了胶辽官话的典型特征，在语音上，古知庄章三组声母都读舌尖前音；
-                    在词汇上，保留了许多古语词汇，如"俺"、"恁"、"饽饽"等；
-                    在语法上，有着独特的助词系统，如"来"、"嘞"、"哈"等。
+                    在词汇上，保留了许多古语词汇，如"日头"、"月明"、"热冷盖"等；
+                    在语法上，有着独特的助词系统和表达方式。
                     这些语言特色体现了高密地区深厚的历史文化底蕴。
                 </div>
             </div>
@@ -609,288 +577,168 @@
             {
                 dialect: "日头",
                 question: "高密方言中'日头'是什么意思？",
-                options: [
-                    "脑袋",
-                    "太阳",
-                    "日子",
-                    "头领"
-                ],
+                options: ["脑袋", "太阳", "日子", "头领"],
                 correct: 1,
                 explanation: "'日头'在高密方言中指太阳，是日常用语，如'日头出来了'。"
             },
             {
                 dialect: "月明",
                 question: "高密话中的'月明'指的是什么？",
-                options: [
-                    "月亮很亮",
-                    "月亮",
-                    "明月",
-                    "明白"
-                ],
+                options: ["月亮很亮", "月亮", "明月", "明白"],
                 correct: 1,
                 explanation: "'月明'是高密方言中对月亮的称呼，是古老的表达方式。"
             },
             {
                 dialect: "傍明天",
                 question: "高密人说的'傍明天'是什么时间？",
-                options: [
-                    "明天傍晚上",
-                    "黎明、天快亮时",
-                    "明天",
-                    "傍晚"
-                ],
+                options: ["明天傍晚上", "黎明、天快亮时", "明天", "傍晚"],
                 correct: 1,
                 explanation: "'傍明天'在高密方言中指黎明、天快亮的时候。"
             },
             {
                 dialect: "头晌",
                 question: "在高密方言中，'头晌'指什么时间？",
-                options: [
-                    "中午",
-                    "上午",
-                    "清晨",
-                    "一整天"
-                ],
+                options: ["中午", "上午", "清晨", "一整天"],
                 correct: 1,
                 explanation: "'头晌'是高密方言中对上午的称呼，与'过晌'相对。"
             },
             {
                 dialect: "过晌",
                 question: "高密话中的'过晌'是什么时间？",
-                options: [
-                    "午后",
-                    "下午",
-                    "晚上",
-                    "饭后"
-                ],
+                options: ["午后", "下午", "晚上", "饭后"],
                 correct: 1,
                 explanation: "'过晌'在高密方言中指下午，过了中午之后的时间。"
             },
             {
                 dialect: "后晌",
                 question: "在高密方言中，'后晌'指的是什么时间？",
-                options: [
-                    "午休时间",
-                    "下午后半段",
-                    "晚上",
-                    "深夜"
-                ],
+                options: ["午休时间", "下午后半段", "晚上", "深夜"],
                 correct: 2,
                 explanation: "'后晌'或'下晌'是高密方言中对晚上的称呼。"
             },
             {
                 dialect: "热冷盖",
                 question: "高密人说的'热冷盖'指哪个身体部位？",
-                options: [
-                    "膝盖",
-                    "额头",
-                    "后脑勺",
-                    "下巴"
-                ],
+                options: ["膝盖", "额头", "后脑勺", "下巴"],
                 correct: 1,
                 explanation: "'热冷盖'是高密方言中对额头的特殊称呼，很有地方特色。"
             },
             {
                 dialect: "埝儿",
                 question: "高密话中的'埝儿'是什么意思？",
-                options: [
-                    "泥巴",
-                    "地方或场地",
-                    "农田",
-                    "围墙"
-                ],
+                options: ["泥巴", "地方或场地", "农田", "围墙"],
                 correct: 1,
                 explanation: "'埝儿'在高密方言中指地方、场地，是常用的地理词汇。"
             },
             {
                 dialect: "棒子",
                 question: "在高密方言中，'棒子'主要指什么农作物？",
-                options: [
-                    "高粱",
-                    "玉米",
-                    "小米",
-                    "大豆"
-                ],
+                options: ["高粱", "玉米", "小米", "大豆"],
                 correct: 1,
                 explanation: "'棒子'或'棒槌'是高密方言中对玉米的称呼。"
             },
             {
                 dialect: "萋萋毛",
                 question: "高密人说的'萋萋毛'是什么植物？",
-                options: [
-                    "杂草",
-                    "小蓟",
-                    "芦苇",
-                    "茅草"
-                ],
+                options: ["杂草", "小蓟", "芦苇", "茅草"],
                 correct: 1,
                 explanation: "'萋萋毛'是高密方言中对小蓟的称呼，是一种常见的野生植物。"
             },
             {
                 dialect: "布嘎",
                 question: "在高密方言中，'布嘎'是什么动物？",
-                options: [
-                    "布谷鸟",
-                    "鸽子",
-                    "麻雀",
-                    "喜鹊"
-                ],
+                options: ["布谷鸟", "鸽子", "麻雀", "喜鹊"],
                 correct: 1,
                 explanation: "'布嘎'是高密方言中对鸽子的特殊称呼。"
             },
             {
                 dialect: "阳沟",
                 question: "高密话中的'阳沟'指什么？",
-                options: [
-                    "阳面的水沟",
-                    "院墙底部的排水洞口",
-                    "阳光充足的地方",
-                    "排水沟"
-                ],
+                options: ["阳面的水沟", "院墙底部的排水洞口", "阳光充足的地方", "排水沟"],
                 correct: 1,
                 explanation: "'阳沟'在高密方言中专指院墙底部用来排水的洞口。"
             },
             {
                 dialect: "唾泌",
                 question: "在高密方言中，'唾泌'是什么？",
-                options: [
-                    "口水",
-                    "唾液",
-                    "鼻涕",
-                    "痰"
-                ],
+                options: ["口水", "唾液", "鼻涕", "痰"],
                 correct: 1,
                 explanation: "'唾泌'是高密方言中对唾液的特殊称呼。"
             },
             {
                 dialect: "谝愣",
                 question: "高密人说的'谝愣'是什么意思？",
-                options: [
-                    "愣头愣脑",
-                    "炫耀",
-                    "发愣",
-                    "骂人"
-                ],
+                options: ["愣头愣脑", "炫耀", "发愣", "骂人"],
                 correct: 1,
                 explanation: "'谝愣'在高密方言中指炫耀、显摆的意思。"
             },
             {
                 dialect: "拄棒",
                 question: "在高密方言中，'拄棒'是什么？",
-                options: [
-                    "支撑的棒子",
-                    "拐棍",
-                    "棍子",
-                    "木棒"
-                ],
+                options: ["支撑的棒子", "拐棍", "棍子", "木棒"],
                 correct: 1,
                 explanation: "'拄棒'是高密方言中对拐棍的称呼，用于支撑走路。"
             },
             {
                 dialect: "小厮",
                 question: "高密话中的'小厮'指什么人？",
-                options: [
-                    "小厮子",
-                    "男孩儿",
-                    "仆人",
-                    "小儿子"
-                ],
+                options: ["小厮子", "男孩儿", "仆人", "小儿子"],
                 correct: 1,
                 explanation: "'小厮'在高密方言中指男孩儿，是对男孩的称呼。"
             },
             {
                 dialect: "嫚姑子",
                 question: "在高密方言中，'嫚姑子'指的是什么？",
-                options: [
-                    "小女孩",
-                    "姑娘、女孩儿",
-                    "姑姑",
-                    "未婚女子"
-                ],
+                options: ["小女孩", "姑娘、女孩儿", "姑姑", "未婚女子"],
                 correct: 1,
                 explanation: "'嫚姑子'是高密方言中对姑娘、女孩儿的称呼。"
             },
             {
                 dialect: "古扎",
                 question: "高密人说的'古扎'是什么食物？",
-                options: [
-                    "粽子",
-                    "包子",
-                    "水饺",
-                    "馒头"
-                ],
+                options: ["粽子", "包子", "水饺", "馒头"],
                 correct: 2,
                 explanation: "'古扎'是高密方言中对水饺的特殊称呼，是当地传统食品。"
             },
             {
                 dialect: "将媳妇",
                 question: "在高密方言中，'将媳妇'是什么意思？",
-                options: [
-                    "带着媳妇",
-                    "照顾媳妇",
-                    "娶媳妇",
-                    "媳妇的将军"
-                ],
+                options: ["带着媳妇", "照顾媳妇", "娶媳妇", "媳妇的将军"],
                 correct: 2,
                 explanation: "'将媳妇'在高密方言中指娶媳妇，结婚的意思。"
             },
             {
                 dialect: "瓜蔓子亲亲",
                 question: "高密话中的'瓜蔓子亲亲'指的是什么？",
-                options: [
-                    "种瓜的亲戚",
-                    "卖瓜的亲戚",
-                    "远亲",
-                    "瓜农亲戚"
-                ],
+                options: ["种瓜的亲戚", "卖瓜的亲戚", "远亲", "瓜农亲戚"],
                 correct: 2,
                 explanation: "'瓜蔓子亲亲'在高密方言中指远亲，形容亲戚关系很远。"
             },
             {
                 dialect: "石头蛋子腌咸菜",
                 question: "高密歇后语'石头蛋子腌咸菜'的下半句是什么？",
-                options: [
-                    "石头咸菜",
-                    "一言难进",
-                    "咸死我了",
-                    "硬骨头"
-                ],
+                options: ["石头咸菜", "一言难进", "咸死我了", "硬骨头"],
                 correct: 1,
                 explanation: "歇后语'石头蛋子腌咸菜——一言（盐）难进'，利用'盐'和'言'的谐音。"
             },
             {
                 dialect: "葛家庙子雇人",
                 question: "高密歇后语'葛家庙子雇人'的下半句是什么？",
-                options: [
-                    "葛家人多",
-                    "葛（各）雇葛（各）",
-                    "庙里人多",
-                    "雇不到人"
-                ],
+                options: ["葛家人多", "葛（各）雇葛（各）", "庙里人多", "雇不到人"],
                 correct: 1,
                 explanation: "歇后语'葛家庙子雇人——葛（各）雇葛（各）'，因为葛家庙子多是姓葛的。"
             },
             {
                 dialect: "刘大人的靴子",
                 question: "高密歇后语'刘大人的靴子'的下半句是什么？",
-                options: [
-                    "大人穿的",
-                    "底儿强",
-                    "靴子好",
-                    "刘大人"
-                ],
+                options: ["大人穿的", "底儿强", "靴子好", "刘大人"],
                 correct: 1,
                 explanation: "歇后语'刘大人的靴子——底儿强（将）'，刘大人即清代刘墉。"
             },
             {
                 dialect: "西北风刮蒺藜",
                 question: "高密歇后语'西北风刮蒺藜'的下半句是什么？",
-                options: [
-                    "风很大",
-                    "连风（讽）带刺",
-                    "蒺藜飞",
-                    "西北风"
-                ],
+                options: ["风很大", "连风（讽）带刺", "蒺藜飞", "西北风"],
                 correct: 1,
                 explanation: "歇后语'西北风刮蒺藜——连风（讽）带刺'，利用'风'和'讽'的谐音。"
             }
@@ -900,9 +748,19 @@
         let score = 0;
         let answered = false;
 
+        // 简化DOM操作函数
+        function $(id) { return document.getElementById(id); }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            $(sectionId).classList.add('active', 'fade-in');
+        }
+
         function showStartScreen() {
-            document.getElementById('heroSection').style.display = 'none';
-            document.getElementById('startScreen').classList.add('active');
+            $('heroSection').style.display = 'none';
+            showSection('startScreen');
         }
 
         function learnMore() {
@@ -913,10 +771,8 @@
             currentQuestion = 0;
             score = 0;
             answered = false;
-            document.getElementById('heroSection').style.display = 'none';
-            document.getElementById('startScreen').classList.remove('active');
-            document.getElementById('testScreen').classList.add('active');
-            document.getElementById('resultScreen').classList.remove('active');
+            $('heroSection').style.display = 'none';
+            showSection('testScreen');
             showQuestion();
         }
 
@@ -924,15 +780,15 @@
             answered = false;
             const question = questions[currentQuestion];
             
-            document.getElementById('questionNumber').textContent = currentQuestion + 1;
-            document.getElementById('questionTitle').textContent = question.question;
-            document.getElementById('dialectText').textContent = `"${question.dialect}"`;
-            document.getElementById('progressText').textContent = `题目 ${currentQuestion + 1} / ${questions.length}`;
+            $('questionNumber').textContent = currentQuestion + 1;
+            $('questionTitle').textContent = question.question;
+            $('dialectText').textContent = `"${question.dialect}"`;
+            $('progressText').textContent = `题目 ${currentQuestion + 1} / ${questions.length}`;
             
             const progress = ((currentQuestion + 1) / questions.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
+            $('progressFill').style.width = progress + '%';
             
-            const optionsContainer = document.getElementById('optionsContainer');
+            const optionsContainer = $('optionsContainer');
             optionsContainer.innerHTML = '';
             
             question.options.forEach((option, index) => {
@@ -943,8 +799,8 @@
                 optionsContainer.appendChild(optionDiv);
             });
             
-            document.getElementById('nextBtn').style.display = 'none';
-            document.getElementById('explanation').classList.remove('show');
+            $('nextBtn').style.display = 'none';
+            $('explanation').classList.remove('show');
         }
 
         function selectOption(index) {
@@ -962,9 +818,9 @@
                 options[question.correct].classList.add('correct');
             }
             
-            document.getElementById('explanationText').textContent = question.explanation;
-            document.getElementById('explanation').classList.add('show');
-            document.getElementById('nextBtn').style.display = 'inline-block';
+            $('explanationText').textContent = question.explanation;
+            $('explanation').classList.add('show');
+            $('nextBtn').style.display = 'inline-block';
         }
 
         function nextQuestion() {
@@ -977,14 +833,13 @@
         }
 
         function showResult() {
-            document.getElementById('testScreen').classList.remove('active');
-            document.getElementById('resultScreen').classList.add('active');
+            showSection('resultScreen');
             
-            document.getElementById('correctCount').textContent = score;
-            document.getElementById('totalQuestions').textContent = questions.length;
-            document.getElementById('score').textContent = Math.round((score / questions.length) * 100) + '%';
+            $('correctCount').textContent = score;
+            $('totalQuestions').textContent = questions.length;
+            $('score').textContent = Math.round((score / questions.length) * 100) + '%';
             
-            const levelBadge = document.getElementById('levelBadge');
+            const levelBadge = $('levelBadge');
             const percentage = (score / questions.length) * 100;
             
             if (percentage === 100) {
@@ -1007,10 +862,30 @@
         }
 
         function backToHome() {
-            document.getElementById('resultScreen').classList.remove('active');
-            document.getElementById('startScreen').classList.remove('active');
-            document.getElementById('heroSection').style.display = 'flex';
+            showSection('startScreen');
+            setTimeout(() => {
+                $('resultScreen').classList.remove('active');
+                $('heroSection').style.display = 'flex';
+            }, 300);
         }
+
+        // 页面加载优化
+        window.addEventListener('load', function() {
+            // 预加载题库数据
+            if (questions.length > 0) {
+                console.log('题库已加载完成，共' + questions.length + '道题目');
+            }
+        });
+
+        // 防止iOS双击缩放
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
