@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精品出版</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --apple-black: #1d1d1f;
+            --apple-gray: #86868b;
+            --apple-light-gray: #f5f5f7;
+            --apple-blue: #0071e3;
+            --apple-navy: #424245;
+            --spacing-unit: 8px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: #ffffff;
+            color: var(--apple-black);
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -.022em;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            height: 48px;
+        }
+
+        .nav-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 3);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--apple-black);
+            letter-spacing: -.022em;
+        }
+
+        /* 主英雄区域 */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 15) calc(var(--spacing-unit) * 3);
+            background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: clamp(56px, 8vw, 96px);
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -.003em;
+            color: var(--apple-black);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            max-width: 1200px;
+            background: linear-gradient(135deg, #1d1d1f 0%, #424245 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(28px, 3.5vw, 42px);
+            line-height: 1.2;
+            font-weight: 400;
+            color: var(--apple-gray);
+            margin-bottom: calc(var(--spacing-unit) * 8);
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: clamp(19px, 2vw, 24px);
+            line-height: 1.4;
+            color: var(--apple-navy);
+            max-width: 680px;
+            margin-bottom: calc(var(--spacing-unit) * 10);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        /* 按钮样式 */
+        .btn-group {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 3);
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 4);
+            font-size: 17px;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -.022em;
+            border-radius: 980px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+            min-width: 28px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--apple-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--apple-blue);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.02);
+        }
+
+        /* 内容容器 */
+        .content-wrapper {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+
+        .section {
+            padding: calc(var(--spacing-unit) * 20) 0;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 4vw, 48px);
+            line-height: 1.1;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 10);
+            color: var(--apple-black);
+        }
+
+        /* 开始界面 */
+        .start-screen, .test-screen, .result-screen {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .start-screen.active, .test-screen.active, .result-screen.active {
+            display: block;
+        }
+
+        .start-content {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 10) 0;
+        }
+
+        .start-description {
+            font-size: 19px;
+            line-height: 1.6;
+            color: var(--apple-navy);
+            max-width: 680px;
+            margin: 0 auto calc(var(--spacing-unit) * 10);
+        }
+
+        /* 测试界面 */
+        .progress-section {
+            margin-bottom: calc(var(--spacing-unit) * 8);
+        }
+
+        .progress-bar {
+            background: rgba(0, 0, 0, 0.1);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .progress-fill {
+            background: var(--apple-blue);
+            height: 100%;
+            transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: var(--apple-gray);
+            text-align: center;
+        }
+
+        .question-card {
+            background: var(--apple-light-gray);
+            border-radius: 18px;
+            padding: calc(var(--spacing-unit) * 8);
+            margin-bottom: calc(var(--spacing-unit) * 8);
+            text-align: center;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--apple-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        .question-title {
+            font-size: 28px;
+            line-height: 1.3;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            color: var(--apple-black);
+        }
+
+        .dialect-text {
+            font-size: 32px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: var(--apple-black);
+            background: rgba(0, 113, 227, 0.1);
+            padding: calc(var(--spacing-unit) * 6);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 113, 227, 0.2);
+            margin: calc(var(--spacing-unit) * 6) 0;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 4);
+            margin: calc(var(--spacing-unit) * 8) 0;
+        }
+
+        .option {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: calc(var(--spacing-unit) * 5);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-align: left;
+            font-size: 17px;
+            line-height: 1.4;
+        }
+
+        .option:hover {
+            border-color: var(--apple-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 113, 227, 0.15);
+        }
+
+        .option.selected {
+            border-color: var(--apple-blue);
+            background: rgba(0, 113, 227, 0.1);
+        }
+
+        .option.correct {
+            border-color: #34c759;
+            background: rgba(52, 199, 89, 0.1);
+            color: #1d7424;
+        }
+
+        .option.incorrect {
+            border-color: #ff3b30;
+            background: rgba(255, 59, 48, 0.1);
+            color: #d70015;
+        }
+
+        .action-buttons {
+            text-align: center;
+            margin-top: calc(var(--spacing-unit) * 8);
+        }
+
+        .explanation {
+            background: rgba(255, 214, 10, 0.1);
+            border-left: 4px solid #ffcc00;
+            padding: calc(var(--spacing-unit) * 5);
+            border-radius: 8px;
+            margin: calc(var(--spacing-unit) * 8) 0;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .explanation h4 {
+            color: var(--apple-black);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .explanation p {
+            color: var(--apple-navy);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* 结果界面 */
+        .result-header {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 10);
+        }
+
+        .result-title {
+            font-size: 48px;
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            color: var(--apple-black);
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 6);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 19px;
+            margin: calc(var(--spacing-unit) * 4) 0;
+        }
+
+        .level-master {
+            background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
+            color: white;
+        }
+
+        .level-expert {
+            background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+            color: white;
+        }
+
+        .level-intermediate {
+            background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
+            color: white;
+        }
+
+        .level-beginner {
+            background: linear-gradient(135deg, #8e8e93 0%, #636366 100%);
+            color: white;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: calc(var(--spacing-unit) * 6);
+            margin: calc(var(--spacing-unit) * 10) 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 6);
+            background: var(--apple-light-gray);
+            border-radius: 18px;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            line-height: 1;
+            font-weight: 700;
+            color: var(--apple-blue);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .stat-label {
+            font-size: 17px;
+            color: var(--apple-gray);
+            font-weight: 400;
+        }
+
+        .knowledge-section {
+            background: var(--apple-light-gray);
+            border-radius: 18px;
+            padding: calc(var(--spacing-unit) * 8);
+            margin: calc(var(--spacing-unit) * 10) 0;
+        }
+
+        .knowledge-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            color: var(--apple-black);
+        }
+
+        .knowledge-content {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--apple-navy);
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 300px;
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 calc(var(--spacing-unit) * 2);
+            }
+
+            .hero-section {
+                padding: calc(var(--spacing-unit) * 10) calc(var(--spacing-unit) * 2);
+            }
+
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: calc(var(--spacing-unit) * 4);
+            }
+
+            .dialect-text {
+                font-size: 24px;
+                padding: calc(var(--spacing-unit) * 4);
+            }
+
+            .question-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">精品出版</div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero-section" id="heroSection">
+        <h1 class="hero-title">精品出版</h1>
+        <p class="hero-subtitle">传承文化精髓 · 弘扬语言之美</p>
+        <p class="hero-description">
+            探索高密方言的独特魅力，通过精心设计的测试题库，深入了解山东方言文化的博大精深。
+        </p>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="showStartScreen()">开始探索</button>
+            <button class="btn btn-secondary" onclick="learnMore()">了解更多</button>
+        </div>
+    </section>
+
+    <!-- 主内容区域 -->
+    <main class="content-wrapper">
+        <!-- 开始界面 -->
+        <section class="section start-screen active" id="startScreen">
+            <div class="start-content">
+                <h2 class="section-title">高密方言文化测试</h2>
+                <p class="start-description">
+                    高密市位于山东省东部，隶属于潍坊市，历史悠久，文化底蕴深厚。<br>
+                    高密方言属于山东方言的胶辽官话，有着独特的语音和词汇特色。<br>
+                    本测试将通过精心设计的题目，测试您对高密方言的了解程度。
+                </p>
+                <button class="btn btn-primary" onclick="startTest()">开始测试</button>
+            </div>
+        </section>
+
+        <!-- 测试界面 -->
+        <section class="section test-screen" id="testScreen">
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text" id="progressText">题目 1 / 20</div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number" id="questionNumber">1</div>
+                <h3 class="question-title">请选择这句话的普通话意思：</h3>
+                <div class="dialect-text" id="dialectText"></div>
+            </div>
+
+            <div class="options" id="optionsContainer"></div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" id="nextBtn" onclick="nextQuestion()" style="display: none;">下一题</button>
+            </div>
+
+            <div class="explanation" id="explanation">
+                <h4>解释：</h4>
+                <p id="explanationText"></p>
+            </div>
+        </section>
+
+        <!-- 结果界面 -->
+        <section class="section result-screen" id="resultScreen">
+            <div class="result-header">
+                <h2 class="result-title">测试完成</h2>
+                <div class="level-badge" id="levelBadge"></div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="correctCount">0</div>
+                    <div class="stat-label">答对题数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalQuestions">20</div>
+                    <div class="stat-label">总题数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="score">0%</div>
+                    <div class="stat-label">正确率</div>
+                </div>
+            </div>
+
+            <div class="knowledge-section">
+                <h3 class="knowledge-title">高密方言文化知识</h3>
+                <div class="knowledge-content">
+                    高密方言保留了胶辽官话的典型特征，在语音上，古知庄章三组声母都读舌尖前音；
+                    在词汇上，保留了许多古语词汇，如"俺"、"恁"、"饽饽"等；
+                    在语法上，有着独特的助词系统，如"来"、"嘞"、"哈"等。
+                    这些语言特色体现了高密地区深厚的历史文化底蕴。
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="restartTest()">重新测试</button>
+                <button class="btn btn-secondary" onclick="backToHome()">返回首页</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 高密方言测试题库
+        const questions = [
+            {
+                dialect: "俺们高密人说话可地道来！",
+                options: [
+                    "我们高密人说话很地道呀！",
+                    "他们高密人说话很地道吗？",
+                    "你们高密人说话很地道呢？",
+                    "我高密人说话很地道啦！"
+                ],
+                correct: 0,
+                explanation: "高密方言中，'俺们'表示'我们'，'来'是语气助词，相当于普通话的'呀'。"
+            },
+            {
+                dialect: "恁咋还不来？天都快黑来！",
+                options: [
+                    "你怎么还不来？天都快黑了！",
+                    "你们怎么还不来？天都快黑呀！",
+                    "他怎么还不来？天都快黑来！",
+                    "我怎么还不来？天都快黑啦！"
+                ],
+                correct: 1,
+                explanation: "'恁'在高密方言中表示'你们'，'咋'表示'怎么'，'来'是语气助词。"
+            },
+            {
+                dialect: "这饽饽蒸得真不赖！",
+                options: [
+                    "这包子蒸得真不错！",
+                    "这馒头蒸得真不错！",
+                    "这面条蒸得真不错！",
+                    "这饺子蒸得真不错！"
+                ],
+                correct: 1,
+                explanation: "'饽饽'在胶东方言中特指馒头，'不赖'表示'不错'、'很好'。"
+            },
+            {
+                dialect: "你这个小嫚儿长得可俊来！",
+                options: [
+                    "你这个男孩长得可俊来！",
+                    "你这个姑娘长得真漂亮啊！",
+                    "你这个老人长得可俊来！",
+                    "这个小孩子长得真漂亮啊！"
+                ],
+                correct: 1,
+                explanation: "'小嫚儿'是高密方言中对年轻姑娘的称呼，'俊'表示漂亮、好看。"
+            },
+            {
+                dialect: "他家恁么些人，咋办嘞？",
+                options: [
+                    "他家那么些人，怎么办呢？",
+                    "他家这些人，怎么办理？",
+                    "他家那些人，咋办来？",
+                    "他家这么多人，怎么办呀？"
+                ],
+                correct: 0,
+                explanation: "'恁么些'表示'那么些'，'嘞'是语气助词，相当于普通话的'呢'。"
+            },
+            {
+                dialect: "俺要去地里薅草来！",
+                options: [
+                    "我要去地里拔草呀！",
+                    "我要去地里除草来！",
+                    "我要去地里割草啦！",
+                    "我要去地里种草嘞！"
+                ],
+                correct: 0,
+                explanation: "'薅草'是方言说法，意思是'拔草、除草'，'来'是语气助词。"
+            },
+            {
+                dialect: "你这个小巴狗子真机灵！",
+                options: [
+                    "这个小猫真机灵！",
+                    "这个小孩子真机灵！",
+                    "这个小狗真机灵！",
+                    "这个小兔子真机灵！"
+                ],
+                correct: 2,
+                explanation: "'小巴狗子'是高密方言中对小狗的称呼，带有喜爱之情。"
+            },
+            {
+                dialect: "这天儿真潮唧唧的！",
+                options: [
+                    "这天儿真冷啊！",
+                    "这天儿真热啊！",
+                    "这天儿真潮湿啊！",
+                    "这天儿真好啊！"
+                ],
+                correct: 2,
+                explanation: "'潮唧唧'是方言，形容天气很潮湿，湿润得让人不舒服。"
+            },
+            {
+                dialect: "快把衣裳穿好，别感冒来！",
+                options: [
+                    "快把衣服穿好，别感冒呀！",
+                    "快把衣服穿好，别感冒来！",
+                    "快把衣裳穿好，别感冒啦！",
+                    "快把衣服穿好，别感冒嘞！"
+                ],
+                correct: 0,
+                explanation: "'衣裳'是方言对'衣服'的称呼，'来'是语气助词，表示提醒。"
+            },
+            {
+                dialect: "俺爹和俺娘都在地里干活来！",
+                options: [
+                    "我爸爸和我妈妈都在地里干活呀！",
+                    "我爷爷和我奶奶都在地里干活来！",
+                    "我爸爸和我妈妈都在地里干活啦！",
+                    "我爹和我娘都在地里干活嘞！"
+                ],
+                correct: 0,
+                explanation: "'爹'和'娘'是方言中对爸爸和妈妈的称呼，'来'是语气助词。"
+            },
+            {
+                dialect: "这孩子真犟，说不听！",
+                options: [
+                    "这孩子真乖，很听话！",
+                    "这孩子真倔强，不听劝！",
+                    "这孩子真懒，不爱听！",
+                    "这孩子真忙，没时间听！"
+                ],
+                correct: 1,
+                explanation: "'犟'在胶东方言中表示固执、倔强，形容人很固执不听取意见。"
+            },
+            {
+                dialect: "你咋这么磨蹭，快点吧！",
+                options: [
+                    "你怎么这么忙碌，快点吧！",
+                    "你怎么这么安静，快点吧！",
+                    "你怎么这么缓慢，快点吧！",
+                    "你怎么这么开心，快点吧！"
+                ],
+                correct: 2,
+                explanation: "'磨蹭'在方言中表示行动迟缓、拖拖拉拉，形容做事慢腾腾的。"
+            },
+            {
+                dialect: "这水忒热了，等会儿再喝！",
+                options: [
+                    "这水太甜了，等会儿再喝！",
+                    "这水太冷了，等会儿再喝！",
+                    "这水太热了，等会儿再喝！",
+                    "这水太苦了，等会儿再喝！"
+                ],
+                correct: 2,
+                explanation: "'忒'在胶东方言中是'太'的意思，表示程度很深。"
+            },
+            {
+                dialect: "俺家后院种了不少葱来！",
+                options: [
+                    "我家后院种了不少蒜呀！",
+                    "我家后院种了不少花呀！",
+                    "我家后院种了不少葱呀！",
+                    "我家后院种了不少草呀！"
+                ],
+                correct: 2,
+                explanation: "高密地区盛产大葱，'葱'在当地是常见的蔬菜，'来'是语气助词。"
+            },
+            {
+                dialect: "你别忽悠俺了，俺知道！",
+                options: [
+                    "你别骗我了，我知道！",
+                    "你别帮我了，我知道！",
+                    "你别教我了，我知道！",
+                    "你别骂我了，我知道！"
+                ],
+                correct: 0,
+                explanation: "'忽悠'是东北和华北地区常用的口语词，意思是欺骗、蒙骗。"
+            },
+            {
+                dialect: "这孩子长得真像他爹！",
+                options: [
+                    "这孩子长得真像他妈妈！",
+                    "这孩子长得真像他爸爸！",
+                    "这孩子长得真像他爷爷！",
+                    "这孩子长得真像他奶奶！"
+                ],
+                correct: 1,
+                explanation: "'爹'在方言中指父亲，是胶东地区对爸爸的传统称呼。"
+            },
+            {
+                dialect: "你咋这么造，慢点儿！",
+                options: [
+                    "你怎么这么急，慢点儿！",
+                    "你怎么这么浪费，慢点儿！",
+                    "你怎么这么快，慢点儿！",
+                    "你怎么这么吵，慢点儿！"
+                ],
+                correct: 1,
+                explanation: "'造'在胶东方言中有浪费、挥霍的意思，也指动作粗暴。"
+            },
+            {
+                dialect: "今儿个天儿真不赖！",
+                options: [
+                    "今天天气真不错！",
+                    "明天天气真不错！",
+                    "昨天天气真不错！",
+                    "后天天气真不错！"
+                ],
+                correct: 0,
+                explanation: "'今儿个'是'今天'的方言说法，'不赖'表示'不错'、'很好'。"
+            },
+            {
+                dialect: "俺去赶集买点儿菜来！",
+                options: [
+                    "我去超市买点儿菜呀！",
+                    "我去市场买点儿菜呀！",
+                    "我去集市买点儿菜呀！",
+                    "我去药店买点儿菜呀！"
+                ],
+                correct: 2,
+                explanation: "'赶集'是北方地区对去集市贸易活动的称呼，是农村重要的购物方式。"
+            },
+            {
+                dialect: "这瓜真甜，水分十足！",
+                options: [
+                    "这瓜真苦，水分十足！",
+                    "这瓜真酸，水分十足！",
+                    "这瓜真甜，水分充足！",
+                    "这瓜真辣，水分充足！"
+                ],
+                correct: 2,
+                explanation: "'十足'在方言中表示'充足'、'充分'，形容水分很足。"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function showStartScreen() {
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('startScreen').classList.add('active');
+        }
+
+        function learnMore() {
+            showStartScreen();
+        }
+
+        function startTest() {
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('startScreen').classList.remove('active');
+            document.getElementById('testScreen').classList.add('active');
+            document.getElementById('resultScreen').classList.remove('active');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            answered = false;
+            const question = questions[currentQuestion];
+            
+            document.getElementById('questionNumber').textContent = currentQuestion + 1;
+            document.getElementById('dialectText').textContent = question.dialect;
+            document.getElementById('progressText').textContent = `题目 ${currentQuestion + 1} / ${questions.length}`;
+            
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('explanation').classList.remove('show');
+        }
+
+        function selectOption(index) {
+            if (answered) return;
+            
+            answered = true;
+            const question = questions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            
+            options[index].classList.add(index === question.correct ? 'correct' : 'incorrect');
+            
+            if (index === question.correct) {
+                score++;
+            } else {
+                options[question.correct].classList.add('correct');
+            }
+            
+            document.getElementById('explanationText').textContent = question.explanation;
+            document.getElementById('explanation').classList.add('show');
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('testScreen').classList.remove('active');
+            document.getElementById('resultScreen').classList.add('active');
+            
+            document.getElementById('correctCount').textContent = score;
+            document.getElementById('totalQuestions').textContent = questions.length;
+            document.getElementById('score').textContent = Math.round((score / questions.length) * 100) + '%';
+            
+            const levelBadge = document.getElementById('levelBadge');
+            const percentage = (score / questions.length) * 100;
+            
+            if (percentage === 100) {
+                levelBadge.textContent = '🏆 方言大师';
+                levelBadge.className = 'level-badge level-master';
+            } else if (percentage >= 80) {
+                levelBadge.textContent = '🥈 高密通';
+                levelBadge.className = 'level-badge level-expert';
+            } else if (percentage >= 60) {
+                levelBadge.textContent = '🥉 基础水平';
+                levelBadge.className = 'level-badge level-intermediate';
+            } else {
+                levelBadge.textContent = '📚 初学者';
+                levelBadge.className = 'level-badge level-beginner';
+            }
+        }
+
+        function restartTest() {
+            startTest();
+        }
+
+        function backToHome() {
+            document.getElementById('resultScreen').classList.remove('active');
+            document.getElementById('startScreen').classList.remove('active');
+            document.getElementById('heroSection').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
