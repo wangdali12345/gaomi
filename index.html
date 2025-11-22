@@ -514,7 +514,7 @@
         <h1 class="hero-title">精品出版</h1>
         <p class="hero-subtitle">传承文化精髓 · 弘扬语言之美</p>
         <p class="hero-description">
-            探索高密方言的独特魅力，通过精心设计的测试题库，深入了解山东方言文化的博大精深。
+            探索高密方言的独特魅力，通过精心设计的词汇测试，深入了解山东方言文化的博大精深。
         </p>
         <div class="btn-group">
             <button class="btn btn-primary" onclick="showStartScreen()">开始探索</button>
@@ -527,11 +527,11 @@
         <!-- 开始界面 -->
         <section class="section start-screen active" id="startScreen">
             <div class="start-content">
-                <h2 class="section-title">高密方言文化测试</h2>
+                <h2 class="section-title">高密方言词汇测试</h2>
                 <p class="start-description">
                     高密市位于山东省东部，隶属于潍坊市，历史悠久，文化底蕴深厚。<br>
                     高密方言属于山东方言的胶辽官话，有着独特的语音和词汇特色。<br>
-                    本测试将通过精心设计的题目，测试您对高密方言的了解程度。
+                    本测试将通过20道精选词汇题目，深度考察您对高密方言的了解程度。
                 </p>
                 <button class="btn btn-primary" onclick="startTest()">开始测试</button>
             </div>
@@ -548,7 +548,7 @@
 
             <div class="question-card">
                 <div class="question-number" id="questionNumber">1</div>
-                <h3 class="question-title">请选择这句话的普通话意思：</h3>
+                <h3 class="question-title" id="questionTitle">高密方言中这个词是什么意思？</h3>
                 <div class="dialect-text" id="dialectText"></div>
             </div>
 
@@ -604,227 +604,247 @@
     </main>
 
     <script>
-        // 高密方言测试题库
+        // 高密方言词汇测试题库（20道）
         const questions = [
             {
-                dialect: "俺们高密人说话可地道来！",
+                dialect: "皮锤",
+                question: "高密方言中'皮锤'是什么意思？",
                 options: [
-                    "我们高密人说话很地道呀！",
-                    "他们高密人说话很地道吗？",
-                    "你们高密人说话很地道呢？",
-                    "我高密人说话很地道啦！"
-                ],
-                correct: 0,
-                explanation: "高密方言中，'俺们'表示'我们'，'来'是语气助词，相当于普通话的'呀'。"
-            },
-            {
-                dialect: "恁咋还不来？天都快黑来！",
-                options: [
-                    "你怎么还不来？天都快黑了！",
-                    "你们怎么还不来？天都快黑呀！",
-                    "他怎么还不来？天都快黑来！",
-                    "我怎么还不来？天都快黑啦！"
+                    "膝盖",
+                    "拳头",
+                    "锤子",
+                    "手掌"
                 ],
                 correct: 1,
-                explanation: "'恁'在高密方言中表示'你们'，'咋'表示'怎么'，'来'是语气助词。"
+                explanation: "在山东方言中，'皮锤'指的是拳头，是日常生活中常用的口语词汇。"
             },
             {
-                dialect: "这饽饽蒸得真不赖！",
+                dialect: "手面子",
+                question: "高密话中的'手面子'指什么？",
                 options: [
-                    "这包子蒸得真不错！",
-                    "这馒头蒸得真不错！",
-                    "这面条蒸得真不错！",
-                    "这饺子蒸得真不错！"
+                    "手套",
+                    "手背",
+                    "手掌",
+                    "手镯"
+                ],
+                correct: 2,
+                explanation: "'手面子'在胶东方言中指的是手掌，是身体部位的方言表达。"
+            },
+            {
+                dialect: "额拉盖子",
+                question: "'额拉盖子'在高密方言中指哪个身体部位？",
+                options: [
+                    "下巴",
+                    "额头",
+                    "后脑勺",
+                    "脸颊"
                 ],
                 correct: 1,
-                explanation: "'饽饽'在胶东方言中特指馒头，'不赖'表示'不错'、'很好'。"
+                explanation: "'额拉盖子'是高密方言中对额头的称呼，是典型的胶东方言词汇。"
             },
             {
-                dialect: "你这个小嫚儿长得可俊来！",
+                dialect: "蝎虎子",
+                question: "高密人说的'蝎虎子'是什么动物？",
                 options: [
-                    "你这个男孩长得可俊来！",
-                    "你这个姑娘长得真漂亮啊！",
-                    "你这个老人长得可俊来！",
-                    "这个小孩子长得真漂亮啊！"
+                    "蝎子",
+                    "壁虎",
+                    "蜥蜴",
+                    "蛇"
                 ],
                 correct: 1,
-                explanation: "'小嫚儿'是高密方言中对年轻姑娘的称呼，'俊'表示漂亮、好看。"
+                explanation: "'蝎虎子'是山东地区对壁虎的俗称，与蝎子无关，容易造成混淆。"
             },
             {
-                dialect: "他家恁么些人，咋办嘞？",
+                dialect: "老鸹",
+                question: "在高密方言中，'老鸹'指的是什么鸟？",
                 options: [
-                    "他家那么些人，怎么办呢？",
-                    "他家这些人，怎么办理？",
-                    "他家那些人，咋办来？",
-                    "他家这么多人，怎么办呀？"
-                ],
-                correct: 0,
-                explanation: "'恁么些'表示'那么些'，'嘞'是语气助词，相当于普通话的'呢'。"
-            },
-            {
-                dialect: "俺要去地里薅草来！",
-                options: [
-                    "我要去地里拔草呀！",
-                    "我要去地里除草来！",
-                    "我要去地里割草啦！",
-                    "我要去地里种草嘞！"
-                ],
-                correct: 0,
-                explanation: "'薅草'是方言说法，意思是'拔草、除草'，'来'是语气助词。"
-            },
-            {
-                dialect: "你这个小巴狗子真机灵！",
-                options: [
-                    "这个小猫真机灵！",
-                    "这个小孩子真机灵！",
-                    "这个小狗真机灵！",
-                    "这个小兔子真机灵！"
-                ],
-                correct: 2,
-                explanation: "'小巴狗子'是高密方言中对小狗的称呼，带有喜爱之情。"
-            },
-            {
-                dialect: "这天儿真潮唧唧的！",
-                options: [
-                    "这天儿真冷啊！",
-                    "这天儿真热啊！",
-                    "这天儿真潮湿啊！",
-                    "这天儿真好啊！"
-                ],
-                correct: 2,
-                explanation: "'潮唧唧'是方言，形容天气很潮湿，湿润得让人不舒服。"
-            },
-            {
-                dialect: "快把衣裳穿好，别感冒来！",
-                options: [
-                    "快把衣服穿好，别感冒呀！",
-                    "快把衣服穿好，别感冒来！",
-                    "快把衣裳穿好，别感冒啦！",
-                    "快把衣服穿好，别感冒嘞！"
-                ],
-                correct: 0,
-                explanation: "'衣裳'是方言对'衣服'的称呼，'来'是语气助词，表示提醒。"
-            },
-            {
-                dialect: "俺爹和俺娘都在地里干活来！",
-                options: [
-                    "我爸爸和我妈妈都在地里干活呀！",
-                    "我爷爷和我奶奶都在地里干活来！",
-                    "我爸爸和我妈妈都在地里干活啦！",
-                    "我爹和我娘都在地里干活嘞！"
-                ],
-                correct: 0,
-                explanation: "'爹'和'娘'是方言中对爸爸和妈妈的称呼，'来'是语气助词。"
-            },
-            {
-                dialect: "这孩子真犟，说不听！",
-                options: [
-                    "这孩子真乖，很听话！",
-                    "这孩子真倔强，不听劝！",
-                    "这孩子真懒，不爱听！",
-                    "这孩子真忙，没时间听！"
+                    "喜鹊",
+                    "乌鸦",
+                    "麻雀",
+                    "鸽子"
                 ],
                 correct: 1,
-                explanation: "'犟'在胶东方言中表示固执、倔强，形容人很固执不听取意见。"
+                explanation: "'老鸹'是山东方言中对乌鸦的称呼，是常见的鸟类方言词汇。"
             },
             {
-                dialect: "你咋这么磨蹭，快点吧！",
+                dialect: "焦叶子",
+                question: "高密话中的'焦叶子'指的是什么食物？",
                 options: [
-                    "你怎么这么忙碌，快点吧！",
-                    "你怎么这么安静，快点吧！",
-                    "你怎么这么缓慢，快点吧！",
-                    "你怎么这么开心，快点吧！"
-                ],
-                correct: 2,
-                explanation: "'磨蹭'在方言中表示行动迟缓、拖拖拉拉，形容做事慢腾腾的。"
-            },
-            {
-                dialect: "这水忒热了，等会儿再喝！",
-                options: [
-                    "这水太甜了，等会儿再喝！",
-                    "这水太冷了，等会儿再喝！",
-                    "这水太热了，等会儿再喝！",
-                    "这水太苦了，等会儿再喝！"
-                ],
-                correct: 2,
-                explanation: "'忒'在胶东方言中是'太'的意思，表示程度很深。"
-            },
-            {
-                dialect: "俺家后院种了不少葱来！",
-                options: [
-                    "我家后院种了不少蒜呀！",
-                    "我家后院种了不少花呀！",
-                    "我家后院种了不少葱呀！",
-                    "我家后院种了不少草呀！"
-                ],
-                correct: 2,
-                explanation: "高密地区盛产大葱，'葱'在当地是常见的蔬菜，'来'是语气助词。"
-            },
-            {
-                dialect: "你别忽悠俺了，俺知道！",
-                options: [
-                    "你别骗我了，我知道！",
-                    "你别帮我了，我知道！",
-                    "你别教我了，我知道！",
-                    "你别骂我了，我知道！"
-                ],
-                correct: 0,
-                explanation: "'忽悠'是东北和华北地区常用的口语词，意思是欺骗、蒙骗。"
-            },
-            {
-                dialect: "这孩子长得真像他爹！",
-                options: [
-                    "这孩子长得真像他妈妈！",
-                    "这孩子长得真像他爸爸！",
-                    "这孩子长得真像他爷爷！",
-                    "这孩子长得真像他奶奶！"
+                    "烧焦的树叶",
+                    "一种面食",
+                    "炸土豆片",
+                    "烤红薯片"
                 ],
                 correct: 1,
-                explanation: "'爹'在方言中指父亲，是胶东地区对爸爸的传统称呼。"
+                explanation: "'焦叶子'是高密地区的一种传统面食，因形状和炸制后的颜色得名，不是字面意思的焦叶子。"
             },
             {
-                dialect: "你咋这么造，慢点儿！",
+                dialect: "各拉拜子",
+                question: "'各拉拜子'在高密方言中指什么？",
                 options: [
-                    "你怎么这么急，慢点儿！",
-                    "你怎么这么浪费，慢点儿！",
-                    "你怎么这么快，慢点儿！",
-                    "你怎么这么吵，慢点儿！"
-                ],
-                correct: 1,
-                explanation: "'造'在胶东方言中有浪费、挥霍的意思，也指动作粗暴。"
-            },
-            {
-                dialect: "今儿个天儿真不赖！",
-                options: [
-                    "今天天气真不错！",
-                    "明天天气真不错！",
-                    "昨天天气真不错！",
-                    "后天天气真不错！"
+                    "膝盖",
+                    "胳膊",
+                    "脚踝",
+                    "手腕"
                 ],
                 correct: 0,
-                explanation: "'今儿个'是'今天'的方言说法，'不赖'表示'不错'、'很好'。"
+                explanation: "'各拉拜子'或'胳拉拜子'是山东方言中对膝盖的称呼，发音与普通话差异较大。"
             },
             {
-                dialect: "俺去赶集买点儿菜来！",
+                dialect: "爹喽龟",
+                question: "高密人说的'爹喽龟'是什么昆虫？",
                 options: [
-                    "我去超市买点儿菜呀！",
-                    "我去市场买点儿菜呀！",
-                    "我去集市买点儿菜呀！",
-                    "我去药店买点儿菜呀！"
+                    "知了猴",
+                    "乌龟",
+                    "甲虫",
+                    "青蛙"
                 ],
-                correct: 2,
-                explanation: "'赶集'是北方地区对去集市贸易活动的称呼，是农村重要的购物方式。"
+                correct: 0,
+                explanation: "'爹喽龟'是高密方言中对蝉的幼虫（知了猴）的称呼，是当地特色方言词汇。"
             },
             {
-                dialect: "这瓜真甜，水分十足！",
+                dialect: "麻嘎子",
+                question: "'麻嘎子'在高密方言中指的是什么？",
                 options: [
-                    "这瓜真苦，水分十足！",
-                    "这瓜真酸，水分十足！",
-                    "这瓜真甜，水分充足！",
-                    "这瓜真辣，水分充足！"
+                    "麻雀",
+                    "喜鹊",
+                    "乌鸦",
+                    "燕子"
+                ],
+                correct: 1,
+                explanation: "'麻嘎子'是山东地区对喜鹊的方言称呼，与麻雀是不同鸟类。"
+            },
+            {
+                dialect: "长bu",
+                question: "高密话中的'长bu'是什么意思？",
+                options: [
+                    "发芽",
+                    "发霉",
+                    "生长",
+                    "腐烂"
+                ],
+                correct: 1,
+                explanation: "'长bu'中的'bu'指'毛'，合起来指食物发霉长毛，是日常生活中的常用词。"
+            },
+            {
+                dialect: "蹲级",
+                question: "在高密方言中，'蹲级'是什么意思？",
+                options: [
+                    "蹲下",
+                    "留级",
+                    "毕业",
+                    "升级"
+                ],
+                correct: 1,
+                explanation: "'蹲级'在方言中表示留级，不是因为身体蹲下的动作，而是学业上的概念。"
+            },
+            {
+                dialect: "作假",
+                question: "高密话中'作假'在日常对话中常表示什么意思？",
+                options: [
+                    "造假",
+                    "客气",
+                    "欺骗",
+                    "装饰"
+                ],
+                correct: 1,
+                explanation: "在山东方言中，'作假'常表示客气、见外，不是字面的造假意思。"
+            },
+            {
+                dialect: "肉",
+                question: "在高密方言中，说某人'肉'是什么意思？",
+                options: [
+                    "胖",
+                    "懒",
+                    "办事不利索",
+                    "贪吃"
                 ],
                 correct: 2,
-                explanation: "'十足'在方言中表示'充足'、'充分'，形容水分很足。"
+                explanation: "'肉'在方言中形容人办事不利索、动作慢，不是指胖或者贪吃。"
+            },
+            {
+                dialect: "过明",
+                question: "高密话中的'过明'指的是什么时间？",
+                options: [
+                    "昨天",
+                    "今天",
+                    "明天",
+                    "后天"
+                ],
+                correct: 2,
+                explanation: "'过明'是山东方言中对明天的称呼，与普通话表达方式不同。"
+            },
+            {
+                dialect: "踢苗",
+                question: "在高密农业术语中，'踢苗'是什么意思？",
+                options: [
+                    "除草",
+                    "间苗",
+                    "施肥",
+                    "浇水"
+                ],
+                correct: 1,
+                explanation: "'踢苗'是农业术语，指间苗（拔掉多余的幼苗），不是踢踏的动作。"
+            },
+            {
+                dialect: "咣当底",
+                question: "高密话中的'咣当底'指的是什么地方？",
+                options: [
+                    "床底下",
+                    "厨房",
+                    "客厅",
+                    "院子"
+                ],
+                correct: 1,
+                explanation: "'咣当底'是高密方言中对厨房的称呼，因锅碗瓢盆的碰撞声而得名。"
+            },
+            {
+                dialect: "咕哝",
+                question: "在高密方言中，'咕哝'主要表示什么？",
+                options: [
+                    "小声说话",
+                    "大声喊叫",
+                    "哭泣",
+                    "唱歌"
+                ],
+                correct: 0,
+                explanation: "'咕哝'在方言中指小声说话、嘟囔，是常见的动作描述词。"
+            },
+            {
+                dialect: "鼓捣",
+                question: "高密话中的'鼓捣'是什么意思？",
+                options: [
+                    "敲打",
+                    "修理、摆弄",
+                    "玩耍",
+                    "整理"
+                ],
+                correct: 1,
+                explanation: "'鼓捣'在方言中表示修理、摆弄，含有反复尝试的意思，是万能动词。"
+            },
+            {
+                dialect: "拉呱",
+                question: "在高密方言中，'拉呱'是什么活动？",
+                options: [
+                    "拉手",
+                    "聊天",
+                    "吵架",
+                    "散步"
+                ],
+                correct: 1,
+                explanation: "'拉呱'是山东方言中聊天的意思，是非常地道的口语表达。"
+            },
+            {
+                dialect: "利亮",
+                question: "高密话中的'利亮'表示什么状态？",
+                options: [
+                    "明亮",
+                    "干净整洁",
+                    "聪明",
+                    "漂亮"
+                ],
+                correct: 1,
+                explanation: "'利亮'在方言中表示干净、整洁，是形容环境或人状态的好词。"
             }
         ];
 
@@ -857,7 +877,8 @@
             const question = questions[currentQuestion];
             
             document.getElementById('questionNumber').textContent = currentQuestion + 1;
-            document.getElementById('dialectText').textContent = question.dialect;
+            document.getElementById('questionTitle').textContent = question.question;
+            document.getElementById('dialectText').textContent = `"${question.dialect}"`;
             document.getElementById('progressText').textContent = `题目 ${currentQuestion + 1} / ${questions.length}`;
             
             const progress = ((currentQuestion + 1) / questions.length) * 100;
